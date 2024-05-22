@@ -1,0 +1,22 @@
+categories:
+  Images:
+    - .jpg
+    - .jpeg
+    - .png
+    - .gif
+  Documents:
+    - .pdf
+    - .doc
+    - .docx
+    - .txt
+  Videos:
+    - .mp4
+    - .avi
+    - .mkv
+  Music:
+    - .mp3
+    - .wav
+    - .aac
+  HTML:
+    - .html
+    - .htm
