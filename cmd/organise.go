@@ -14,6 +14,8 @@ var date bool
 var prefix string
 var suffix string
 var startNumber int
+var remove bool
+var relocate string
 
 var organizeCmd = &cobra.Command{
 	Use:   "organize",
@@ -42,15 +44,37 @@ var organizeCmd = &cobra.Command{
 				fmt.Printf("Error organizing files: %v\n", err)
 			}
 		}
+		if remove || relocate != "" {
+			duplicates, err := organizer.DetectDuplicates(dir)
+			if err != nil {
+				fmt.Printf("Error detecting duplicates: %v\n", err)
+				return
+			}
+			if remove {
+				err = organizer.RemoveDuplicates(duplicates)
+				if err != nil {
+					fmt.Printf("Error removing duplicates: %v\n", err)
+					return
+				}
+			} else if relocate != "" {
+				err = organizer.RelocateDuplicates(duplicates, relocate)
+				if err != nil {
+					fmt.Printf("Error detecting duplicates: %v\n", err)
+					return
+				}
+			} 
+		} 
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(organizeCmd)
 	organizeCmd.Flags().StringVar(&dir, "dir", "", "Directory to organize")
-	organizeCmd.Flags().StringVar(&configPath, "config", "", "Path to the configuration file (optional)")
-	organizeCmd.Flags().BoolVar(&date, "date", false, "Organize by date")
-	organizeCmd.Flags().StringVar(&prefix, "prefix", "", "Prefix to add to file names")
-	organizeCmd.Flags().StringVar(&suffix, "suffix", "", "Suffix to add to file names")
-	organizeCmd.Flags().IntVar(&startNumber, "start-number", 0, "Starting number for sequential renaming")
+	organizeCmd.Flags().StringVarP(&configPath, "config","c", "", "Path to the configuration file (optional)")
+	organizeCmd.Flags().BoolVarP(&date, "date","d", false, "Organize by date")
+	organizeCmd.Flags().StringVarP(&prefix, "prefix","p", "", "Prefix to add to file names")
+	organizeCmd.Flags().StringVarP(&suffix, "suffix","s", "", "Suffix to add to file names")
+	organizeCmd.Flags().IntVarP(&startNumber, "start-number","n", 0, "Starting number for sequential renaming")
+	organizeCmd.Flags().BoolVar(&remove, "remove", false, "Remove duplicate files")
+	organizeCmd.Flags().StringVar(&relocate, "relocate", "", "Directory to relocate duplicate files")
 }
