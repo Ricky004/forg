@@ -58,8 +58,8 @@ func CategorizeByType(dir string, configPath string) error {
 
 		ext := filepath.Ext(info.Name())
 		for category, extensions := range categories {
-			for _, exextension := range extensions {
-				if ext == exextension {
+			for _, exetension := range extensions {
+				if ext == exetension {
 					destinationDir := filepath.Join(dir, category)
 					if err := os.MkdirAll(destinationDir, os.ModePerm); err != nil {
 						return err
@@ -71,13 +71,11 @@ func CategorizeByType(dir string, configPath string) error {
 					}
 
 					fmt.Printf("Moved %s to %s\n", path, newPath)
-					fmt.Printf("Moved %s to %s\n", path, newPath)
 					utils.LogOperation(fmt.Sprintf("Moved %s to %s", path, newPath))
 					return nil
 				}
 			}
-		}
+		} 
 		return nil
 	})
-
 }

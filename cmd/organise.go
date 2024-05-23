@@ -10,6 +10,7 @@ import (
 
 var dir string
 var configPath string
+var date bool
 
 var organizeCmd = &cobra.Command{
 	Use:   "organize",
@@ -21,9 +22,16 @@ var organizeCmd = &cobra.Command{
 			fmt.Println("Please specify a directory using the --dir flag.")
 			return
 		}
-		err := organizer.CategorizeByType(dir, configPath)
-		if err != nil {
-			fmt.Printf("Error organizing files: %v\n", err)
+		if date {
+			err := organizer.OrganizeByDate(dir)
+			if err != nil {
+				fmt.Printf("Error organizing files: %v\n", err)
+			}
+		} else {
+			err := organizer.CategorizeByType(dir, configPath)
+			if err != nil {
+				fmt.Printf("Error organizing files: %v\n", err)
+			}
 		}
 	},
 }
@@ -32,4 +40,5 @@ func init() {
 	rootCmd.AddCommand(organizeCmd)
 	organizeCmd.Flags().StringVar(&dir, "dir", "", "Directory to organize")
 	organizeCmd.Flags().StringVar(&configPath, "config", "", "Path to the configuration file (optional)")
+	organizeCmd.Flags().BoolVar(&date, "date", false, "Organize by date")
 }
