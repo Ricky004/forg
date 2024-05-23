@@ -11,6 +11,9 @@ import (
 var dir string
 var configPath string
 var date bool
+var prefix string
+var suffix string
+var startNumber int
 
 var organizeCmd = &cobra.Command{
 	Use:   "organize",
@@ -33,6 +36,12 @@ var organizeCmd = &cobra.Command{
 				fmt.Printf("Error organizing files: %v\n", err)
 			}
 		}
+		if prefix != "" || suffix != "" || startNumber != 0 {
+			err := organizer.BulkRenaming(dir, prefix, suffix, startNumber)
+			if err != nil {
+				fmt.Printf("Error organizing files: %v\n", err)
+			}
+		}
 	},
 }
 
@@ -41,4 +50,7 @@ func init() {
 	organizeCmd.Flags().StringVar(&dir, "dir", "", "Directory to organize")
 	organizeCmd.Flags().StringVar(&configPath, "config", "", "Path to the configuration file (optional)")
 	organizeCmd.Flags().BoolVar(&date, "date", false, "Organize by date")
+	organizeCmd.Flags().StringVar(&prefix, "prefix", "", "Prefix to add to file names")
+	organizeCmd.Flags().StringVar(&suffix, "suffix", "", "Suffix to add to file names")
+	organizeCmd.Flags().IntVar(&startNumber, "start-number", 0, "Starting number for sequential renaming")
 }
