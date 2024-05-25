@@ -8,14 +8,16 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var dir string
-var configPath string
-var date bool
-var prefix string
-var suffix string
-var startNumber int
-var remove bool
-var relocate string
+var (
+	dir             string
+	configPath      string
+	date            bool
+	prefix          string
+	suffix          string
+	startNumber     int
+	remove          bool
+	relocate        string
+)
 
 var organizeCmd = &cobra.Command{
 	Use:   "organize",
@@ -62,19 +64,20 @@ var organizeCmd = &cobra.Command{
 					fmt.Printf("Error detecting duplicates: %v\n", err)
 					return
 				}
-			} 
-		} 
+			}
+		}
+		
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(organizeCmd)
 	organizeCmd.Flags().StringVar(&dir, "dir", "", "Directory to organize")
-	organizeCmd.Flags().StringVarP(&configPath, "config","c", "", "Path to the configuration file (optional)")
-	organizeCmd.Flags().BoolVarP(&date, "date","d", false, "Organize by date")
-	organizeCmd.Flags().StringVarP(&prefix, "prefix","p", "", "Prefix to add to file names")
-	organizeCmd.Flags().StringVarP(&suffix, "suffix","s", "", "Suffix to add to file names")
-	organizeCmd.Flags().IntVarP(&startNumber, "start-number","n", 0, "Starting number for sequential renaming")
+	organizeCmd.Flags().StringVarP(&configPath, "config", "c", "", "Path to the configuration file (optional)")
+	organizeCmd.Flags().BoolVarP(&date, "date", "d", false, "Organize by date")
+	organizeCmd.Flags().StringVarP(&prefix, "prefix", "p", "", "Prefix to add to file names")
+	organizeCmd.Flags().StringVarP(&suffix, "suffix", "s", "", "Suffix to add to file names")
+	organizeCmd.Flags().IntVarP(&startNumber, "start-number", "n", 0, "Starting number for sequential renaming")
 	organizeCmd.Flags().BoolVar(&remove, "remove", false, "Remove duplicate files")
 	organizeCmd.Flags().StringVar(&relocate, "relocate", "", "Directory to relocate duplicate files")
 }
