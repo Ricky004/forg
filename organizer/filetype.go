@@ -5,7 +5,7 @@ import (
 	"gopkg.in/yaml.v3"
 	"os"
 	"path/filepath"
-	"github.com/Ricky004/forga/utils"
+	"github.com/Ricky004/forg/utils"
 )
 
 var DefaultCategories = map[string][]string{

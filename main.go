@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Ricky004/forga/cmd"
+	"github.com/Ricky004/forg/cmd"
 )
 
 func main() {
