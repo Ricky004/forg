@@ -20,7 +20,7 @@ A powerful Command Line Interface (CLI) tool written in Go to organize, search, 
 **2. Run the CLI**: Execute the following command in your terminal:
 
 ```bash 
-go install github.com/Ricky004/forg@v0.1.1
+go install github.com/Ricky004/forg@v0.1.2
 ```
 Then, run the CLI from anywhere
 ```bash
