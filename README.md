@@ -14,14 +14,24 @@ A powerful Command Line Interface (CLI) tool written in Go to organize, search, 
 
 ## Installation
 
-### Prerequisites
-- Go 1.22.0 or higher
+### With Golang
+**1. Prerequisites**: Ensure you have Go 1.22.0 or higher
+ 
+**2. Run the CLI**: Execute the following command in your terminal:
+
+```bash 
+go install github.com/Ricky004/forg@v0.1.1
+```
+Then, run the CLI from anywhere
+```bash
+forg
+```
 
 ### Build from Source
 ```bash
-git clone https://github.com/Ricky004/forga.git
-cd forga
-go build -o forga
+git clone https://github.com/Ricky004/forg.git
+cd forg
+go build -o forg
 ```
 
 ## Usage
@@ -31,52 +41,52 @@ go build -o forga
 #### Organize Files by Type
 ```bash
 # Organize files in current directory using default categories
-./forga organize --dir /path/to/directory
+forg organize --dir /path/to/directory
 
 # Use custom configuration file
-./forga organize --dir /path/to/directory --config config.yaml
+forg organize --dir /path/to/directory --config config.yaml
 ```
 
 #### Organize Files by Date
 ```bash
 # Organize files by modification date (YYYY/MM structure)
-./forga organize --dir /path/to/directory --date
+forg organize --dir /path/to/directory --date
 ```
 
 #### Bulk Renaming
 ```bash
 # Add prefix and suffix to all files
-./forga organize --dir /path/to/directory --prefix "IMG_" --suffix "_backup"
+forg organize --dir /path/to/directory --prefix "IMG_" --suffix "_backup"
 
 # Add sequential numbers starting from 100
-./forga organize --dir /path/to/directory --start-number 100
+forg organize --dir /path/to/directory --start-number 100
 ```
 
 #### Handle Duplicates
 ```bash
 # Remove duplicate files
-./forga organize --dir /path/to/directory --remove
+forg organize --dir /path/to/directory --remove
 
 # Move duplicates to another directory
-./forga organize --dir /path/to/directory --relocate /path/to/duplicates
+forg organize --dir /path/to/directory --relocate /path/to/duplicates
 ```
 
 #### Search Files
 ```bash
 # Search by file name
-./forga search /path/to/directory --name "document"
+forg search /path/to/directory --name "document"
 
 # Search by extension
-./forga search /path/to/directory --extension ".pdf"
+forg search /path/to/directory --extension ".pdf"
 
 # Search by size range
-./forga search /path/to/directory --min-size "1mb" --max-size "100mb"
+forg search /path/to/directory --min-size "1mb" --max-size "100mb"
 
 # Search by date range
-./forga search /path/to/directory --after "2024-01-01" --before "2024-12-31"
+forg search /path/to/directory --after "2024-01-01" --before "2024-12-31"
 
 # Combine multiple filters
-./forga search /path/to/directory --name "report" --extension ".pdf" --min-size "500kb"
+forg search /path/to/directory --name "report" --extension ".pdf" --min-size "500kb"
 ```
 
 ## Configuration
@@ -138,7 +148,7 @@ categories:
 
 ### Organize Command
 ```bash
-./forga organize [flags]
+forg organize [flags]
 ```
 
 **Flags:**
@@ -153,7 +163,7 @@ categories:
 
 ### Search Command
 ```bash
-./forga search [directories...] [flags]
+forg search [directories...] [flags]
 ```
 
 **Flags:**
@@ -169,28 +179,28 @@ categories:
 ### Organize Downloads Folder
 ```bash
 # Organize downloads by file type
-./forga organize --dir ~/Downloads
+forg organize --dir ~/Downloads
 
 # Organize downloads by date and add prefix to all files
-./forga organize --dir ~/Downloads --date --prefix "downloaded_"
+forg organize --dir ~/Downloads --date --prefix "downloaded_"
 ```
 
 ### Clean Up Photo Directory
 ```bash
 # Organize photos and remove duplicates
-./forga organize --dir ~/Photos --remove
+forg organize --dir ~/Photos --remove
 
 # Organize photos and move duplicates to backup folder
-./forga organize --dir ~/Photos --relocate ~/Photos/duplicates
+forg organize --dir ~/Photos --relocate ~/Photos/duplicates
 ```
 
 ### Find Large Files
 ```bash
 # Find files larger than 100MB
-./forga search ~/Documents --min-size "100mb"
+forg search ~/Documents --min-size "100mb"
 
 # Find old large video files
-./forga search ~/Videos --extension ".mp4" --before "2023-01-01" --min-size "1gb"
+forg search ~/Videos --extension ".mp4" --before "2023-01-01" --min-size "1gb"
 ```
 
 ## Contributing
